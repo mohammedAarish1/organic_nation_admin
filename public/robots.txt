@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+
+# Explicitly allow OpenAI / ChatGPT crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+
+Sitemap: https://organicnation.co.in/sitemap.xml

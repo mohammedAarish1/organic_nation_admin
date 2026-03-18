@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      # nodejs: 20.10.0
+      nodejs: 20.17.0
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Creating .env file...
+      - echo "VITE_BACKEND_URL=https://dpzi63xcomvst.cloudfront.net" > .env
+      - echo Building React app...
+      - npm run build
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: "dist"
+
+cache:
+  paths:
+    - "node_modules/**/*"

@@ -1,0 +1,92 @@
+/* ============== 
+   General CSS
+   ==============
+*/
+
+
+body {
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Roboto Condensed", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --hoverEffect: #dcd3b9;
+/* new colors  */
+  --themeColor: #7A2E1D;       /* Deep Maroon */
+  --accent-color: #9B7A2F;        /* Earthy Gold */
+  --background-color: #F5EFE6;    /* Soft Beige */
+  --text-color: #3E2C1B;          /* Tree Bark Brown */
+  --text-light-color: #FFFFFF;    /* Pure White */
+  --secondary-color: #6B8E23;     /* Olive Green (optional) */
+  --neutral-color: #DCD2C0;       /* Muted Sand (optional) */
+  --alert-color: #D87C45;  
+}
+
+.underline-hover {
+  position: relative;
+}
+
+.underline-hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  /* Change color as needed */
+  transition: width 0.3s ease;
+}
+
+.underline-hover:hover::after {
+  width: 100%;
+}
+
+
+/* =============== 
+   css for loaders
+   ===============
+*/
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #514b82;
+  -webkit-mask: radial-gradient(
+    circle closest-side at 50% 40%,
+    #0000 94%,
+    #000
+  );
+  transform-origin: 50% 40%;
+  animation: l25 1s infinite linear;
+}
+@keyframes l25 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+
+
+@media screen and (max-width: 640px) {
+  .adminSidebar {
+    position: fixed;
+    transform: translateX(-100%);
+    z-index: 999;
+
+  }
+
+  .adminSidebar .active {
+    transform: translateX(100%);
+    transition: all;
+    transition-duration: 1s;
+  }
+}
+/* ==============================  **** end **** ==================================================  */
