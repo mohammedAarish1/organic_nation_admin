@@ -1,5 +1,3 @@
-import React from 'react'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react';
 
 const SubmitButton = ({
@@ -13,11 +11,8 @@ const SubmitButton = ({
     const isDisabled = isSubmitting || disabled;
 
     return (
-        <motion.div
+        <div
             className="mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
         >
             <button
                 id={id}
@@ -38,10 +33,7 @@ const SubmitButton = ({
                 `}
             >
                 <span>{text}</span>
-                <motion.span
-                    animate={{ x: isSubmitting ? 0 : [0, 5, 0] }}
-                    transition={{ repeat: isSubmitting ? 0 : Infinity, duration: 1.5 }}
-                >
+                <span>
                     {isSubmitting ? (
                         <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -50,9 +42,9 @@ const SubmitButton = ({
                     ) : (
                         <ArrowRight />
                     )}
-                </motion.span>
+                </span>
             </button>
-        </motion.div>
+        </div>
     )
 }
 

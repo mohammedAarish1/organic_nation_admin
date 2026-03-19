@@ -17,9 +17,10 @@ const headers = [
 const AdminProducts = () => {
     const dispatch = useDispatch()
     const { loading, totalProducts } = useSelector((state) => state.adminData);
-
     useEffect(() => {
-        dispatch(getList('products'));
+        if(totalProducts.length===0){
+            dispatch(getList('products'));
+        }
     }, []);
 
     if (loading) return <div>Loading...</div>;

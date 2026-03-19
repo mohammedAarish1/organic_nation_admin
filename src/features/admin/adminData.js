@@ -3,6 +3,31 @@ import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
+
+export const getAdminData=createAsyncThunk(
+    'adminData/getAdminData',
+    async (_,{rejectWithValue})=>{
+         const adminToken = JSON.parse(sessionStorage.getItem('adminToken'))
+        try {
+            const response = await axios.get(`${apiUrl}/api/admin/resources`, {
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response.data.success) {
+                return response.data
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+)
+
 // get total numbers of orders, users, etc..
 export const getResourcesCount = createAsyncThunk(
     'adminData/getResourcesCount',
@@ -53,75 +78,23 @@ export const getList = createAsyncThunk(
 );
 
 
-// get all orders 
-// export const getTotalOrders = createAsyncThunk(
-//     'adminData/getTotalOrders',
-//     async (_, { rejectWithValue }) => {
-//         const adminToken = JSON.parse(sessionStorage.getItem('adminToken'));
-//         try {
-//             const response = await axios.get(`${apiUrl}/api/admin/orders`, {
-//                 headers: {
-//                     'Authorization': `Bearer ${adminToken}`,
-//                     'Content-Type': 'application/json'
-//                 }
-//             })
+export const getMainBanners = createAsyncThunk(
+    'adminData/getMainBanners',
+    async (type, { rejectWithValue }) => {
+        // const adminToken = JSON.parse(sessionStorage.getItem('adminToken'))
+        try {
+            const response = await axios.get(`${apiUrl}/api/main/banners`)
+            return response.data
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    }
+);
 
-//             return response.data;
-//         } catch (error) {
-//             if (error.response && error.response.data) {
-//                 return rejectWithValue(error.response.data);
-//             } else {
-//                 return rejectWithValue(error.message);
-//             }
-//         }
-//     }
-// )
-// get all users
-// export const getAllUsers = createAsyncThunk(
-//     'adminData/getAllUsers',
-//     async (_, { rejectWithValue }) => {
-//         const adminToken = JSON.parse(sessionStorage.getItem('adminToken'));
-//         try {
-//             const response = await axios.get(`${apiUrl}/api/admin/users`, {
-//                 headers: {
-//                     'Authorization': `Bearer ${adminToken}`,
-//                     'Content-Type': 'application/json'
-//                 }
-//             })
-
-//             return response.data;
-//         } catch (error) {
-//             if (error.response && error.response.data) {
-//                 return rejectWithValue(error.response.data);
-//             } else {
-//                 return rejectWithValue(error.message);
-//             }
-//         }
-//     }
-// )
-// get all users queris
-// export const getAllUserQueries = createAsyncThunk(
-//     'adminData/getAllUserQueries',
-//     async (_, { rejectWithValue }) => {
-//         const adminToken = JSON.parse(sessionStorage.getItem('adminToken'));
-//         try {
-//             const response = await axios.get(`${apiUrl}/api/admin/queries`, {
-//                 headers: {
-//                     'Authorization': `Bearer ${adminToken}`,
-//                     'Content-Type': 'application/json'
-//                 }
-//             })
-
-//             return response.data;
-//         } catch (error) {
-//             if (error.response && error.response.data) {
-//                 return rejectWithValue(error.response.data);
-//             } else {
-//                 return rejectWithValue(error.message);
-//             }
-//         }
-//     }
-// )
 
 
 // generate invoice
@@ -425,6 +398,7 @@ const initialState = {
     error: null,
     generatingInvoice: false,
     generatingSaleReport: false,
+    bannersList:[],
     // ordersByStatus: {
     //     filteredOrderData: [],
     //     orderStatusTab: "total"
@@ -716,6 +690,17 @@ const adminData = createSlice({
                 state.otherLoading.updatingOrderStatus = false
                 state.error = action.payload
             })
+
+            // .addCase(getMainBanners.pending, (state) => {
+            //         state.error = null
+            // })
+            .addCase(getMainBanners.fulfilled, (state, action) => {
+                state.bannersList = action.payload.mainBanners
+            })
+            // .addCase(getMainBanners.rejected, (state, action) => {
+            //     state.bannersList = false
+            //     state.error = action.payload
+            // })
 
     }
 

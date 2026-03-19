@@ -1,81 +1,84 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import  { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getList,
-  getReturnsByStatus,
-} from "../../features/admin/adminData";
+import { getList, getReturnsByStatus } from "../../features/admin/adminData";
 import Loader from "../../components/common/Loader";
 import StatusTabs from "../../components/common/StatusTabs";
 
-const AdminTable = lazy(() => import("../../components/admin/common/AdminTable"))
-
+const AdminTable = lazy(
+  () => import("../../components/admin/common/AdminTable"),
+);
 
 const headers = [
-  { key: 'invoiceNumber', label: 'Invoice Number' },
-  { key: 'itemName', label: 'Item Name' },
-  { key: 'weight', label: 'Weight' },
-  { key: 'quantity', label: 'Quantity' },
-  { key: 'returnStatus', label: 'Return Status' },
-  { key: 'returnOptions', label: 'Requested for' },
-  { key: 'createdAt', label: 'Date' }
-]
-
+  { key: "invoiceNumber", label: "Invoice Number" },
+  { key: "itemName", label: "Item Name" },
+  { key: "weight", label: "Weight" },
+  { key: "quantity", label: "Quantity" },
+  { key: "returnStatus", label: "Return Status" },
+  { key: "returnOptions", label: "Requested for" },
+  { key: "createdAt", label: "Date" },
+];
 
 const STATUS_BUTTONS = [
   {
-    id: 'requested',
-    label: 'Requested',
-    borderColor: 'orange-500',
-    iconBgColor: 'EEF2FF',
-    iconColor: 'blue',
-    shadowColor: 'blue-400',
-    getCount: (totalReturns) => (totalReturns?.filter((curReturn) => curReturn.returnStatus === "requested").length || 0)
-  }
-  ,
+    id: "requested",
+    label: "Requested",
+    borderColor: "orange-500",
+    iconBgColor: "EEF2FF",
+    iconColor: "blue",
+    shadowColor: "blue-400",
+    getCount: (totalReturns) =>
+      totalReturns?.filter(
+        (curReturn) => curReturn.returnStatus === "requested",
+      ).length || 0,
+  },
 
   {
-    id: 'rejected',
-    label: 'Rejected',
-    borderColor: 'orange-500',
-    iconBgColor: 'EEF2FF',
-    iconColor: 'red',
-    shadowColor: 'red-500',
-    getCount: (totalReturns) => totalReturns?.filter((curReturn) => curReturn.returnStatus === "rejected").length || 0
+    id: "rejected",
+    label: "Rejected",
+    borderColor: "orange-500",
+    iconBgColor: "EEF2FF",
+    iconColor: "red",
+    shadowColor: "red-500",
+    getCount: (totalReturns) =>
+      totalReturns?.filter((curReturn) => curReturn.returnStatus === "rejected")
+        .length || 0,
   },
   {
-    id: 'inProgress',
-    label: 'In Progress',
-    borderColor: 'purple-500',
-    iconBgColor: 'ECFDF5',
-    iconColor: 'purple',
-    shadowColor: 'purple-400',
-    getCount: (totalReturns) => totalReturns?.filter((curReturn) => curReturn.returnStatus === "inProgress").length || 0
+    id: "inProgress",
+    label: "In Progress",
+    borderColor: "purple-500",
+    iconBgColor: "ECFDF5",
+    iconColor: "purple",
+    shadowColor: "purple-400",
+    getCount: (totalReturns) =>
+      totalReturns?.filter(
+        (curReturn) => curReturn.returnStatus === "inProgress",
+      ).length || 0,
   },
   {
-    id: 'completed',
-    label: 'Completed',
-    borderColor: 'orange-500',
-    iconBgColor: 'FFFBEB',
-    iconColor: 'orange',
-    shadowColor: 'orange-400',
-    getCount: (totalReturns) => totalReturns?.filter((curReturn) => curReturn.returnStatus === "completed").length || 0
+    id: "completed",
+    label: "Completed",
+    borderColor: "orange-500",
+    iconBgColor: "FFFBEB",
+    iconColor: "orange",
+    shadowColor: "orange-400",
+    getCount: (totalReturns) =>
+      totalReturns?.filter(
+        (curReturn) => curReturn.returnStatus === "completed",
+      ).length || 0,
   },
 ];
-
 
 const AdminReturns = () => {
   const dispatch = useDispatch();
 
-
   const { returns, loading } = useSelector((state) => state.adminData);
-  const { totalReturns, filteredReturns, curReturnStatusTab } = returns
+  const { totalReturns, filteredReturns, curReturnStatusTab } = returns;
   // const adminToken = JSON.parse(sessionStorage.getItem("adminToken"));
-  console.log('filteredReturns',filteredReturns)
   useEffect(() => {
-    dispatch(getList('returns'));
-
-    // dispatch(getTotalReturns());
-    // dispatch(getReturnsByStatus("requested"));
+    if (totalReturns.length === 0) {
+      dispatch(getList("returns"));
+    }
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -84,18 +87,17 @@ const AdminReturns = () => {
     <div className="">
       {/* Boxes */}
 
-      <div className='py-5 font-serif'>
-        <div className='flex flex-wrap sm:gap-10 gap-2'>
-          {STATUS_BUTTONS.map(button => (
+      <div className="py-5 font-serif">
+        <div className="flex flex-wrap sm:gap-10 gap-2">
+          {STATUS_BUTTONS.map((button) => (
             <StatusTabs
               key={button.id}
               isActive={curReturnStatusTab === button.id}
               count={button.getCount(totalReturns)}
               label={button.label}
               onClick={() => {
-                dispatch(getReturnsByStatus(button.id))
-              }
-              }
+                dispatch(getReturnsByStatus(button.id));
+              }}
               borderColor={button.borderColor}
               iconBgColor={button.iconBgColor}
               iconColor={button.iconColor}
@@ -117,9 +119,9 @@ const AdminReturns = () => {
           </div>
         )} */}
 
-        <Suspense fallback={<Loader height='200px' />}>
+        <Suspense fallback={<Loader height="200px" />}>
           <AdminTable
-            title='Returns'
+            title="Returns"
             headers={headers}
             data={filteredReturns}
           />

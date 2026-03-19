@@ -31,7 +31,9 @@ const AdminOrders = () => {
   const dispatch = useDispatch();
   const { loading, orders } = useSelector((state) => state.adminData);
   useEffect(() => {
-    dispatch(getList("orders"));
+    if(orders.totalOrders.length===0){
+      dispatch(getList("orders"));
+    }
   }, []);
 
   if (loading) return <div>Loading...</div>;

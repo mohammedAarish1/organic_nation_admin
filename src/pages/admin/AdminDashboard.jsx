@@ -17,14 +17,12 @@ const StatBox = ({ value, title, onClick }) => (
 
 
 const AdminDashboard = () => {
-console.log('dash')
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { resourcesCount, loading } = useSelector(state => state.adminData);
   // const products = useSelector((state) => state.filterData.products);
 
   const { orderCount, productCount, returnCount, queryCount, userCount } = resourcesCount;
-console.log('orderCount',orderCount)
   useEffect(() => {
     dispatch(getResourcesCount())
   }, [])

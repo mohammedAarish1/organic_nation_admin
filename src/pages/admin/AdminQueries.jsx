@@ -15,9 +15,10 @@ const headers = [
 const AdminQueries = () => {
   const dispatch = useDispatch()
   const { totalUserQueries, loading } = useSelector(state => state.adminData);
-
   useEffect(() => {
-    dispatch(getList('queries'))
+    if(totalUserQueries.length===0){
+      dispatch(getList('queries'))
+    }
   }, [])
 
   if (loading) return <div>Loading..</div>
