@@ -16,7 +16,7 @@ body {
 }
 
 :root {
-  --hoverEffect: #dcd3b9;
+  /* --hoverEffect: #dcd3b9; */
 /* new colors  */
   --themeColor: #7A2E1D;       /* Deep Maroon */
   --accent-color: #9B7A2F;        /* Earthy Gold */
