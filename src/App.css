@@ -28,7 +28,7 @@ body {
   --alert-color: #D87C45;  
 }
 
-.underline-hover {
+/* .underline-hover {
   position: relative;
 }
 
@@ -41,12 +41,12 @@ body {
   height: 2px;
   background-color: #000;
   /* Change color as needed */
-  transition: width 0.3s ease;
-}
+  /* transition: width 0.3s ease;
+} */
 
-.underline-hover:hover::after {
+/* .underline-hover:hover::after {
   width: 100%;
-}
+} */ 
 
 
 /* =============== 
