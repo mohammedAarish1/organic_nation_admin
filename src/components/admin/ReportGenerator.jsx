@@ -1,5 +1,5 @@
 // ReportGenerator.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { generateReport } from '../../features/admin/adminData';
 // react icons 
@@ -73,7 +73,7 @@ const ReportGenerator = ({title,type}) => {
         {generatingSaleReport ? <span className='flex items-center justify-center'><Loader size={16} /> </span> : <span className='flex items-center justify-center gap-2 text-white'>Download Report  <Download size={16} /></span>}
       </button>
       {errorMessage && <p className="mt-2 text-sm text-red-600">{errorMessage}</p>}
-      {error && <p className="mt-2 text-sm text-red-600">Error: {error}</p>}
+      {error && <p className="mt-2 text-sm text-red-600">Error:</p>}
     </div>
 
   );

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import  { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/common/Loader";
 import { getList } from "../../features/admin/adminData";
@@ -33,11 +33,11 @@ const AdminUsers = () => {
       <Suspense fallback={<Loader height="200px" />}>
         <AdminTable title="Users" headers={headers} data={totalUsers} />
       </Suspense>
-      {/* <div>
+      <div>
         <Suspense fallback={<Loader height="200px" />}>
           <ReportGenerator title="Generate User Report" type="users" />
         </Suspense>
-      </div> */}
+      </div>
     </div>
   );
 };

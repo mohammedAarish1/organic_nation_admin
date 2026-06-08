@@ -47,6 +47,10 @@ const AdminSearch = ({
                 filtered = filtered.filter(returned =>
                     returned.itemName.toLowerCase().includes(searchTerm.toLowerCase())
                 );
+            }else if (title==='Subscription List'){
+                filtered = filtered.filter(list =>
+                    list.email.toLowerCase().includes(searchTerm.toLowerCase())
+                );
             }
 
         }

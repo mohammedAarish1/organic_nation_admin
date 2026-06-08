@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { adminLogout } from "../../features/admin/adminSlice";
 import CloseButton from "../button/CloseButton"
 
-import { Home, ShoppingCart, User, StretchHorizontal, LogOut, MailQuestionMark, Undo2, Image } from 'lucide-react'
+import { Home, ShoppingCart, User, StretchHorizontal, LogOut, MailQuestionMark, Undo2, Image, Newspaper } from 'lucide-react'
 
 const AdminSidebar = memo(({ setShowSidebar }) => {
     const dispatch = useDispatch();
@@ -25,12 +25,13 @@ const AdminSidebar = memo(({ setShowSidebar }) => {
         { path: "/queries", icon: MailQuestionMark, label: "Queries" },
         { path: "/returns", icon: Undo2, label: "Returns" },
         { path: "/products", icon: StretchHorizontal, label: "Products" },
+        { path: "/subscription-list", icon: Newspaper, label: "Subscription List" },
         { path: "/banners", icon: Image, label: "Banners" },
         { path: "", icon: LogOut, label: "Logout" },
     ];
 
     return (
-        <div className={`bg-[var(--background-color)]  min-h-screen h-full duration-300 w-64 px-6 py-8`}>
+        <div className={`bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.25),_transparent_40%),radial-gradient(circle_at_center,_rgba(168,85,247,0.20),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.25),_transparent_40%),linear-gradient(to_bottom_right,#020617,#0f172a,#111827)] text-white  min-h-screen h-full duration-300 w-64 px-6 py-8`}>
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-2xl font-bold">
                     <img

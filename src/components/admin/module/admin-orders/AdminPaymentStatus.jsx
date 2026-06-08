@@ -9,8 +9,8 @@ const AdminPaymentStatus = ({curStatus,handleOnChange}) => {
                 onChange={(e) => handleOnChange(e.target.value)}
                 className="border rounded p-1"
             >
-                <option value="paid">PAID</option>
-                <option value="pending">PENDING</option>
+                <option value="PAID">PAID</option>
+                <option value="PENDING">PENDING</option>
 
             </select>
         </div>

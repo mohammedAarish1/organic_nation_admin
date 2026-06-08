@@ -7,6 +7,7 @@ import {
 } from "../../features/admin/adminData";
 import AdminOrderTabs from "../../components/admin/module/admin-orders/AdminOrderTabs";
 import Loader from "../../components/common/Loader";
+import AdminCustomOrder from "./AdminCustomOrder";
 
 const AdminTable = lazy(() =>
   import("../../components/admin/common/AdminTable")
@@ -15,7 +16,6 @@ const ReportGenerator = lazy(() =>
   import("../../components/admin/ReportGenerator")
 );
 
-// const AdminCustomOrder = lazy(() => import("./AdminCustomOrder"));
 
 const headers = [
   { key: "userName", label: "Receiver" },
@@ -52,11 +52,13 @@ const AdminOrders = () => {
             data={orders.filteredOrders}
           />
         </Suspense>
-       
+          <Suspense fallback={<Loader height="200px" />}>
+          <AdminCustomOrder />
+        </Suspense>
         <div>
-          {/* <Suspense fallback={<Loader height="200px" />}>
+          <Suspense fallback={<Loader height="200px" />}>
             <ReportGenerator title="Generate Sale Report" type="sales" />
-          </Suspense> */}
+          </Suspense>
         </div>
       </div>
     </div>

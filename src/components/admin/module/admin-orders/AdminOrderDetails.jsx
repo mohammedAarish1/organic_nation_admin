@@ -16,11 +16,7 @@ const AdminOrderDetails = ({ order }) => {
     const handleInvoiceGeneration = (orderId) => {
         dispatch(generateInvoice(orderId))
             .unwrap()
-        // .then(() => {
-        // })
-        // .catch((error) => {
-        //     console.error('Failed to generate invoice:', error);
-        // });
+       
     }
 
     const handleOrderDetails = (order) => {

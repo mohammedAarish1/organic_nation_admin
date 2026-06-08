@@ -7,7 +7,7 @@ import { getResourcesCount } from '../../features/admin/adminData';
 
 const StatBox = ({ value, title, onClick }) => (
   <div
-    className="cursor-pointer flex justify-center flex-col text-white hover:scale-95 duration-300 shadow-lg rounded-md p-4 lg:w-1/5 md:w-1/3 w-full h-36 hover:opacity-85 bg-gradient-to-r from-[var(--accent-color)] to-[var(--accent-color)] shadow-orange-300"
+    className="cursor-pointer flex justify-center flex-col text-white hover:scale-95 duration-300 shadow-lg rounded-md p-4 lg:w-1/5 md:w-1/3 w-full h-36 hover:opacity-85 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.25),_transparent_40%),radial-gradient(circle_at_center,_rgba(168,85,247,0.20),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.25),_transparent_40%),linear-gradient(to_bottom_right,#020617,#0f172a,#111827)] shadow-orange-300"
     onClick={onClick}
   >
     <p className="text-4xl font-bold">{value}</p>
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
   const { resourcesCount, loading } = useSelector(state => state.adminData);
   // const products = useSelector((state) => state.filterData.products);
 
-  const { orderCount, productCount, returnCount, queryCount, userCount } = resourcesCount;
+  const { orderCount, productCount, returnCount, queryCount, userCount,subscriptionCount } = resourcesCount;
   useEffect(() => {
     dispatch(getResourcesCount())
   }, [])
@@ -57,6 +57,11 @@ const AdminDashboard = () => {
       value: returnCount,
       title: 'Total Returns',
       path: '/returns',
+    },
+    {
+      value: subscriptionCount,
+      title: 'Subscription',
+      path: '/subscription-list',
     },
   ];
 

@@ -5,19 +5,16 @@ import { getList } from '../../features/admin/adminData';
 const AdminTable = lazy(() => import('../../components/admin/common/AdminTable'))
 
 const headers = [
-  { key: 'fullName', label: 'Full Name' },
   { key: 'email', label: 'Email' },
-  { key: 'phoneNumber', label: 'Phone No' },
-  { key: 'city', label: 'City' },
-  { key: 'createdAt', label: 'Date' }
+  { key: 'subscribedAt', label: 'Date' }
 ]
 
-const AdminQueries = () => {
+const AdminSubscriptionList = () => {
   const dispatch = useDispatch()
-  const { totalUserQueries, loading } = useSelector(state => state.adminData);
+  const { subscription_list, loading } = useSelector(state => state.adminData);
   useEffect(() => {
-    if(totalUserQueries.length===0){
-      dispatch(getList('queries'))
+    if(subscription_list.length===0){
+      dispatch(getList('newsletterEmails'))
     }
   }, [])
 
@@ -26,16 +23,16 @@ const AdminQueries = () => {
     <div>
       <Suspense fallback={<Loader height='200px' />}>
         <AdminTable
-          title='Queries'
+          title='Subscription List'
           headers={headers}
-          data={totalUserQueries}
+          data={subscription_list}
         />
       </Suspense>
     </div>
   );
 };
 
-export default AdminQueries;
+export default AdminSubscriptionList;
 
 
 

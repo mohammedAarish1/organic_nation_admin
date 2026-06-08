@@ -394,6 +394,7 @@ const initialState = {
     // totalReturns: [],
     totalUsers: [],
     totalUserQueries: [],
+    subscription_list: [],
     loading: false,
     error: null,
     generatingInvoice: false,
@@ -512,6 +513,9 @@ const adminData = createSlice({
                 }
                 if (type === 'queries') {
                     state.totalUserQueries = list
+                }
+                if (type === 'newsletterEmails') {
+                    state.subscription_list = list
                 }
                 if (type === 'returns') {
                     state.returns.totalReturns = list
@@ -653,6 +657,8 @@ const adminData = createSlice({
                     state.totalUsers = state.totalUsers.filter(user => user._id !== data._id)
                 } else if (collection === 'Queries') {
                     state.totalUserQueries = state.totalUserQueries.filter(query => query._id !== data._id)
+                }else if (collection === 'Subscription List') {
+                    state.subscription_list = state.subscription_list.filter(query => query._id !== data._id)
                 }
                 // return {
                 //     ...state,
@@ -675,10 +681,10 @@ const adminData = createSlice({
                 const { data, collection } = action.payload
                 state.otherLoading.updatingOrderStatus = false
                 if (collection === 'Orders') {
-                    state.ordersByStatus.filteredOrderData = state.ordersByStatus.filteredOrderData.map(order => order._id === data._id ? { ...order, orderStatus: data.orderStatus } : order)
+                    state.orders.filteredOrders = state.orders.filteredOrders.map(order => order._id === data._id ? { ...order, orderStatus: data.orderStatus } : order)
 
                 } else if (collection === 'Payment') {
-                    state.ordersByStatus.filteredOrderData = state.ordersByStatus.filteredOrderData.map(order => order._id === data._id ? { ...order, paymentStatus: data.paymentStatus } : order)
+                    state.orders.filteredOrders = state.orders.filteredOrders.map(order => order._id === data._id ? { ...order, paymentStatus: data.paymentStatus } : order)
                 } else if (collection === 'Users') {
                     state.totalUsers = state.totalUsers.map(user => user._id === data._id ? { ...user, role: data.role } : user)
                 } else if (collection === 'Returns') {

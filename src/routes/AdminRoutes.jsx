@@ -5,6 +5,7 @@ import { fetchAdminData } from '../features/admin/adminSlice';
 // import { getProductsData } from '../imports';
 import { ToastContainer } from 'react-toastify';
 import { CircleUserRound, Menu } from 'lucide-react';
+import AdminSubscriptionList from '../pages/admin/AdminSubscriptionList';
 
 // Lazy-load the admin components
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
@@ -73,6 +74,7 @@ const AdminRoutes = () => {
               <Route path="/users" element={<AdminUsers />} />
               <Route path="/queries" element={<AdminQueries />} />
               <Route path="/products" element={<AdminProducts />} />
+              <Route path="/subscription-list" element={<AdminSubscriptionList />} />
               <Route path="/returns" element={<AdminReturns />} />
               <Route path="/banners" element={<AdminBanners />} />
             </Routes>
